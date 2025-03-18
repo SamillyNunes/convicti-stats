@@ -4,7 +4,7 @@ import CustomInput from '@/components/CustomInput.vue'
 
 <template>
   <div class="flex w-full h-lvh bg-gray">
-    <div class="flex flex-col h-full w-[55%] items-center justify-center">
+    <div class="flex flex-col h-full w-[100%] lg:w-[55%] items-center justify-center">
       <div class="absolute top-8 left-11">
         <img src="../assets/images/logo.png" alt="Logo Convicti" />
         <h4 class="font-semibold">CONVIC<span class="text-main-purple">TI</span></h4>
@@ -22,7 +22,7 @@ import CustomInput from '@/components/CustomInput.vue'
         <button class="bg-main-purple text-white h-10 rounded-[6px] !mt-2">Entrar</button>
       </div>
     </div>
-    <div class="w-full h-screen bg-main-purple">
+    <div class="hidden md:inline md:w-full h-screen bg-main-purple">
       <img
         src="../assets/images/login_bg.jpg"
         alt="Imagem de exemplo da dashboard da aplicação."
