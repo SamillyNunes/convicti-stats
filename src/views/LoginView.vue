@@ -27,8 +27,13 @@
             class="!py-3"
           />
 
-          <button type="submit" class="bg-main-purple text-white h-10 rounded-[6px] !mt-2 w-full">
-            Entrar
+          <button
+            type="submit"
+            class="bg-main-purple text-white h-10 rounded-[6px] !mt-2 w-full justify-center flex items-center"
+            :disabled="isLoading"
+          >
+            <CustomSpinner v-if="isLoading" />
+            <span v-else>Enviar</span>
           </button>
         </form>
       </div>
@@ -45,14 +50,17 @@
 
 <script setup lang="ts">
 import CustomInput from '@/components/CustomInput.vue'
+import CustomSpinner from '@/components/CustomSpinner.vue'
 import { useAuthStore } from '@/stores/auth'
 import { ref } from 'vue'
 
 const username = ref('')
 const password = ref('')
 const errorMsg = ref('')
+const isLoading = ref(false)
 
 const handleLogin = async () => {
+  isLoading.value = true
   const authStore = useAuthStore()
   const isSuccess = await authStore.loginUser(username.value, password.value)
   if (isSuccess) {
@@ -61,5 +69,6 @@ const handleLogin = async () => {
     console.log('Não deu certo')
     errorMsg.value = 'Usuário ou senha inválidos!'
   }
+  isLoading.value = false
 }
 </script>
