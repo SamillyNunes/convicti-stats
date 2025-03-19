@@ -1,3 +1,4 @@
+import { useAuthStore } from '@/stores/auth'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -17,6 +18,16 @@ const router = createRouter({
       },
     },
   ],
+})
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  if (to.meta.auth && !authStore.isAuthenticated) {
+    // se nao estiver autenticado, volta para a pagina de login
+    next('/login')
+  } else {
+    next()
+  }
 })
 
 export default router

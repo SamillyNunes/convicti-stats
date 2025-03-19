@@ -57,11 +57,14 @@ import CustomInput from '@/components/CustomInput.vue'
 import CustomSpinner from '@/components/CustomSpinner.vue'
 import { useAuthStore } from '@/stores/auth'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const username = ref('')
 const password = ref('')
 const errorMsg = ref('')
 const isLoading = ref(false)
+
+const router = useRouter()
 
 const handleLogin = async () => {
   isLoading.value = true
@@ -69,7 +72,10 @@ const handleLogin = async () => {
   const authStore = useAuthStore()
 
   try {
-    await authStore.loginUser(username.value, password.value)
+    const isLogged = await authStore.loginUser(username.value, password.value)
+    if (isLogged) {
+      router.push('/dashboard')
+    }
   } catch (error: any) {
     console.log('entrou no catch do login')
     errorMsg.value = error as string
