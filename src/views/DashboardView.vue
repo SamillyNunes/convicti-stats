@@ -35,6 +35,8 @@
           <h1 class="font-bold text-[2.5rem]">330</h1>
         </StatsCard>
       </div>
+
+      <FeedbacksCard />
     </div>
   </div>
 </template>
@@ -45,4 +47,5 @@ import StatsCard from '@/components/StatsCard.vue'
 import cloudIcon from '@/assets/icons/cloud.png'
 import starsIcon from '@/assets/icons/stars.png'
 import errorsIcon from '@/assets/icons/errors.png'
+import FeedbacksCard from '@/components/FeedbacksCard.vue'
 </script>
