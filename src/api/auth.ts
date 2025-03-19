@@ -1,4 +1,6 @@
 import axiosInstance from '@/services/http'
+import { handleApiError } from '@/utils/errorHandler'
+import type { AxiosError } from 'axios'
 
 export const login = async (username: string, password: string) => {
   const payload = {
@@ -17,8 +19,9 @@ export const login = async (username: string, password: string) => {
     })
     return resp.data
   } catch (error) {
-    console.error('Erro ao tentar fazer login: ', error)
-    throw error
+    console.error(error)
+    const e = error as AxiosError
+    throw new Error(handleApiError(e))
   }
 }
 

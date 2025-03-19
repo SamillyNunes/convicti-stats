@@ -15,8 +15,7 @@ export const useAuthStore = defineStore('auth', () => {
       localStorage.setItem('access_token', data.access_token)
       return true
     } catch (error) {
-      // TODO: Tratar erro
-      return false
+      throw error
     }
   }
 

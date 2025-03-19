@@ -27,6 +27,10 @@
             class="!py-3"
           />
 
+          <span v-if="errorMsg" class="text-error text-xs block !mt-1 !mb-5">
+            {{ errorMsg }}
+          </span>
+
           <button
             type="submit"
             class="bg-main-purple text-white h-10 rounded-[6px] !mt-2 w-full justify-center flex items-center"
@@ -61,14 +65,16 @@ const isLoading = ref(false)
 
 const handleLogin = async () => {
   isLoading.value = true
+  errorMsg.value = ''
   const authStore = useAuthStore()
-  const isSuccess = await authStore.loginUser(username.value, password.value)
-  if (isSuccess) {
-    console.log('Logado!')
-  } else {
-    console.log('Não deu certo')
-    errorMsg.value = 'Usuário ou senha inválidos!'
+
+  try {
+    await authStore.loginUser(username.value, password.value)
+  } catch (error: any) {
+    console.log('entrou no catch do login')
+    errorMsg.value = error as string
+  } finally {
+    isLoading.value = false
   }
-  isLoading.value = false
 }
 </script>
