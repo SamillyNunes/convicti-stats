@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-full !py-5 !px-10 !mt-5">
+  <div class="bg-white w-full h-[35%] !py-5 !px-10 !mt-5 rounded-lg overflow-auto">
     <h3 class="font-semibold text-xl text-gray-200 !mb-4">Feedbacks</h3>
 
     <table class="table-fixed w-full border-separate border-spacing-y-1">
