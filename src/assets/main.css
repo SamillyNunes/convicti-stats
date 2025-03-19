@@ -2,12 +2,6 @@
 
 @import "tailwindcss";
 
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
 @theme {
   --color-*: initial;
   --color-main-purple: #5452FC;
