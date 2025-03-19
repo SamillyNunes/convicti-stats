@@ -19,12 +19,17 @@
           class="align-top odd:bg-gray-150 even:bg-white"
         >
           <td class="!px-2 !py-1">{{ evaluation.description }}</td>
-          <td class="!px-2 !py-1">
+          <td class="!py-1">
             {{ new Date(evaluation.created_at).toLocaleDateString('pt-br') }}
           </td>
-          <td class="!px-2 !py-1">{{ evaluation.evaluation }}</td>
-          <td class="!px-2 !py-1">{{ evaluation.improvements }}</td>
-          <td class="!px-2 !py-1">{{ evaluation.platform }}</td>
+          <td class="!py-1">{{ evaluation.evaluation }}</td>
+
+          <td class="!pr-2 !py-1">
+            <span v-for="improvement in evaluation.improvements.split('.')" class="block">
+              {{ improvement }}
+            </span>
+          </td>
+          <td class="!pr-2 !py-1">{{ evaluation.platform }}</td>
         </tr>
       </tbody>
     </table>
