@@ -13,30 +13,24 @@
         </tr>
       </thead>
       <tbody class="text-[0.65rem] text-gray-200">
-        <tr class="">
-          <td>
-            Aplicativo muito bom, porém poderiam atualizar mensalmente com os dados da qualidade do
-            leite. Quando vira o mês o aplicativo apaga os dados da produção dos meses anteriores,
-            não sendo possível consultar os meses anteriores. Antes não tinha esse problema.
+        <tr
+          v-for="(evaluation, index) in evaluations.data.data"
+          :key="index"
+          class="align-top odd:bg-gray-150 even:bg-white"
+        >
+          <td class="!px-2 !py-1">{{ evaluation.description }}</td>
+          <td class="!px-2 !py-1">
+            {{ new Date(evaluation.created_at).toLocaleDateString('pt-br') }}
           </td>
-          <td>01/04/24</td>
-          <td>4</td>
-          <td>Dados de Produção;Suporte ao Usuário</td>
-          <td>Android</td>
-        </tr>
-        <tr>
-          <td>
-            Aplicativo muito bom, porém poderiam atualizar mensalmente com os dados da qualidade do
-            leite.
-          </td>
-          <td>30/03/24</td>
-          <td>5</td>
-          <td>-</td>
-          <td>IOS</td>
+          <td class="!px-2 !py-1">{{ evaluation.evaluation }}</td>
+          <td class="!px-2 !py-1">{{ evaluation.improvements }}</td>
+          <td class="!px-2 !py-1">{{ evaluation.platform }}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import evaluations from '@/assets/evaluations.json'
+</script>
