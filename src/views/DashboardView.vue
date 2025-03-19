@@ -37,6 +37,8 @@
       </div>
 
       <FeedbacksCard />
+
+      <FeaturesCard />
     </div>
   </div>
 </template>
@@ -48,4 +50,5 @@ import cloudIcon from '@/assets/icons/cloud.png'
 import starsIcon from '@/assets/icons/stars.png'
 import errorsIcon from '@/assets/icons/errors.png'
 import FeedbacksCard from '@/components/FeedbacksCard.vue'
+import FeaturesCard from '@/components/FeaturesCard.vue'
 </script>

@@ -1,0 +1,114 @@
+{
+    "data": {
+        "current_page": 1,
+        "data": [
+            {
+                "id": 1,
+                "name": "Ad qui dolores ut.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:38.000000Z",
+                "updated_at": "2025-03-17T20:51:38.000000Z",
+                "total_usage": 96
+            },
+            {
+                "id": 2,
+                "name": "Dolores impedit aut libero odit.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:38.000000Z",
+                "updated_at": "2025-03-17T20:51:38.000000Z",
+                "total_usage": 103
+            },
+            {
+                "id": 3,
+                "name": "Eos aliquam ut sit a repudiandae atque voluptas.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:38.000000Z",
+                "updated_at": "2025-03-17T20:51:38.000000Z",
+                "total_usage": 116
+            },
+            {
+                "id": 4,
+                "name": "Nulla explicabo numquam temporibus ab architecto nobis.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:38.000000Z",
+                "updated_at": "2025-03-17T20:51:38.000000Z",
+                "total_usage": 109
+            },
+            {
+                "id": 5,
+                "name": "Ullam cupiditate ab optio voluptas vel.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:38.000000Z",
+                "updated_at": "2025-03-17T20:51:38.000000Z",
+                "total_usage": 88
+            },
+            {
+                "id": 6,
+                "name": "Esse minus aut quasi id corporis dolorum.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:38.000000Z",
+                "updated_at": "2025-03-17T20:51:38.000000Z",
+                "total_usage": 97
+            },
+            {
+                "id": 7,
+                "name": "Error officia omnis quis numquam autem adipisci corrupti.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:38.000000Z",
+                "updated_at": "2025-03-17T20:51:38.000000Z",
+                "total_usage": 84
+            },
+            {
+                "id": 8,
+                "name": "Corporis laudantium necessitatibus aut doloremque similique.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:38.000000Z",
+                "updated_at": "2025-03-17T20:51:38.000000Z",
+                "total_usage": 108
+            },
+            {
+                "id": 9,
+                "name": "Error culpa velit autem architecto animi in.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:38.000000Z",
+                "updated_at": "2025-03-17T20:51:38.000000Z",
+                "total_usage": 92
+            },
+            {
+                "id": 10,
+                "name": "Quas inventore qui sed autem.",
+                "is_new": 1,
+                "created_at": "2025-03-17T20:51:39.000000Z",
+                "updated_at": "2025-03-17T20:51:39.000000Z",
+                "total_usage": 107
+            }
+        ],
+        "first_page_url": "http:\/\/localhost:8080\/api\/v1\/features?page=1",
+        "from": 1,
+        "last_page": 1,
+        "last_page_url": "http:\/\/localhost:8080\/api\/v1\/features?page=1",
+        "links": [
+            {
+                "url": null,
+                "label": "&laquo; Previous",
+                "active": false
+            },
+            {
+                "url": "http:\/\/localhost:8080\/api\/v1\/features?page=1",
+                "label": "1",
+                "active": true
+            },
+            {
+                "url": null,
+                "label": "Next &raquo;",
+                "active": false
+            }
+        ],
+        "next_page_url": null,
+        "path": "http:\/\/localhost:8080\/api\/v1\/features",
+        "per_page": 15,
+        "prev_page_url": null,
+        "to": 10,
+        "total": 10
+    }
+}
