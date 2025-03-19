@@ -13,8 +13,10 @@
   --color-main-purple: #5452FC;
   --color-white: #fff;
   --color-black: #000;
-  --color-gray: #F8F8F8;
-  --color-gray-medium: #00000033;
+  --color-gray-100: #F8F8F8;
+  --color-gray-400: #00000033;
+  --color-gray-300: #DEE6F8;
+  --color-gray-700: #2F4565;
 
   --default-font-family: "Nunito", sans-serif;
 }

@@ -3,7 +3,7 @@
     <input
       :placeholder="placeholder"
       :type="type"
-      class="bg-white border border-gray-medium rounded-[6px] w-full h-10 !px-4"
+      class="bg-white border border-gray-400 rounded-[6px] w-full h-10 !px-4"
       v-model="value"
     />
   </div>

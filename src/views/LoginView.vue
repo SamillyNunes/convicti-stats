@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full h-lvh bg-gray">
+  <div class="flex w-full h-lvh bg-gray-100">
     <div class="flex flex-col h-full w-[100%] lg:w-[55%] items-center justify-center">
       <div class="absolute top-8 left-11">
         <img src="../assets/images/logo.png" alt="Logo Convicti" />
