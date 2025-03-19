@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import CustomInput from '@/components/CustomInput.vue'
-</script>
-
 <template>
   <div class="flex w-full h-lvh bg-gray">
     <div class="flex flex-col h-full w-[100%] lg:w-[55%] items-center justify-center">
@@ -16,10 +12,25 @@ import CustomInput from '@/components/CustomInput.vue'
           Insira sua credenciais para acessar a plataforma
         </p>
 
-        <CustomInput type="email" placeholder="Seu e-mail" />
-        <CustomInput type="password" placeholder="Sua senha" class="!py-3" />
+        <form @submit.prevent="handleLogin">
+          <CustomInput
+            type="email"
+            placeholder="Seu e-mail"
+            v-model="username"
+            :onChange="(v) => (username = v)"
+          />
+          <CustomInput
+            type="password"
+            placeholder="Sua senha"
+            v-model="password"
+            :onChange="(v) => (password = v)"
+            class="!py-3"
+          />
 
-        <button class="bg-main-purple text-white h-10 rounded-[6px] !mt-2">Entrar</button>
+          <button type="submit" class="bg-main-purple text-white h-10 rounded-[6px] !mt-2 w-full">
+            Entrar
+          </button>
+        </form>
       </div>
     </div>
     <div class="hidden md:inline md:w-full h-screen bg-main-purple">
@@ -31,3 +42,24 @@ import CustomInput from '@/components/CustomInput.vue'
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import CustomInput from '@/components/CustomInput.vue'
+import { useAuthStore } from '@/stores/auth'
+import { ref } from 'vue'
+
+const username = ref('')
+const password = ref('')
+const errorMsg = ref('')
+
+const handleLogin = async () => {
+  const authStore = useAuthStore()
+  const isSuccess = await authStore.loginUser(username.value, password.value)
+  if (isSuccess) {
+    console.log('Logado!')
+  } else {
+    console.log('Não deu certo')
+    errorMsg.value = 'Usuário ou senha inválidos!'
+  }
+}
+</script>
