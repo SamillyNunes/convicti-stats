@@ -17,3 +17,7 @@ export const login = async (username: string, password: string) => {
     throw error
   }
 }
+
+export const logout = () => {
+  localStorage.removeItem('access_token')
+}
