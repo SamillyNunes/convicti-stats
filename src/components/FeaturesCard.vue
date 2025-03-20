@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white w-full h-[27%] !py-5 !px-10 !mt-5 rounded-lg overflow-auto">
+  <Card class="h-[27%]">
     <h3 class="font-semibold text-xl text-gray-200 !mb-4">Novas Funcionalidades</h3>
 
     <table class="table-fixed w-full border-separate border-spacing-y-1">
@@ -22,9 +22,10 @@
         </tr>
       </tbody>
     </table>
-  </div>
+  </Card>
 </template>
 
 <script setup lang="ts">
 import features from '@/assets/features.json'
+import Card from './Card.vue'
 </script>
