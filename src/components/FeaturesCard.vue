@@ -1,6 +1,6 @@
 <template>
   <Card class="h-[27%]">
-    <h3 class="font-semibold text-xl text-gray-200 !mb-4">Novas Funcionalidades</h3>
+    <Subtitle subtitle="Novas Funcionalidades" />
 
     <table class="table-fixed w-full border-separate border-spacing-y-1">
       <thead class="font-normal text-xs text-gray-200 opacity-40">
@@ -28,4 +28,5 @@
 <script setup lang="ts">
 import features from '@/assets/features.json'
 import Card from './Card.vue'
+import Subtitle from './Subtitle.vue'
 </script>
