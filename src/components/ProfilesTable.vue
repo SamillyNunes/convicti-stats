@@ -22,15 +22,7 @@
           <RoundedLabel v-if="profile.permissions.length === 0" label="Nenhuma" />
         </div>
         <div class="relative table-cell">
-          <button
-            class="bg-white w-8 h-8 p-2 absolute top-[50%] -translate-y-[50%] right-0 cursor-pointer"
-          >
-            <img
-              src="../assets/icons/edit.png"
-              alt="Ícone de editar"
-              class="w-[0.85rem] h-[0.85rem]"
-            />
-          </button>
+          <EditButton class="absolute top-[50%] -translate-y-[50%]" />
         </div>
       </div>
     </template>
@@ -40,4 +32,6 @@
 <script setup lang="ts">
 import profiles from '@/assets/profiles.json'
 import SettingsTableLayout from './SettingsTableLayout.vue'
+import EditButton from './EditButton.vue'
+import RoundedLabel from './RoundedLabel.vue'
 </script>

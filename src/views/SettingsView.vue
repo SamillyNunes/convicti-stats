@@ -10,6 +10,14 @@
 
       <ProfilesTable />
     </Card>
+    <Card class="h-[40%]">
+      <div class="flex justify-between items-center">
+        <Subtitle subtitle="Usuários" />
+        <AddButton />
+      </div>
+
+      <UsersTable />
+    </Card>
   </Layout>
 </template>
 
@@ -20,4 +28,5 @@ import Layout from '@/components/Layout.vue'
 import Subtitle from '@/components/Subtitle.vue'
 import Title from '@/components/Title.vue'
 import ProfilesTable from '@/components/ProfilesTable.vue'
+import UsersTable from '@/components/UsersTable.vue'
 </script>
