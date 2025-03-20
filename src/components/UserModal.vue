@@ -97,12 +97,16 @@ const onSubmitUser = async () => {
       toast.success(`Usuário ${props.selectedUser ? 'atualizado' : 'criado'} com sucesso!`)
       props.onConfirm()
       emit('fetchUsersAgain')
+    } else {
+      props.onCancel()
+      toast.error('Houve um erro na requisição.')
     }
   } catch (error: any) {
     console.error(error)
+    props.onCancel()
     toast.error(error)
   } finally {
-    isLoading.value = true
+    isLoading.value = false
   }
 }
 </script>
