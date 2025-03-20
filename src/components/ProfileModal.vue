@@ -1,12 +1,8 @@
 <template>
-  <div class="fixed inset-0 bg-black/30 flex justify-center items-center z-50" @click="onCancel">
+  <div class="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
     <div class="bg-gray-100 w-[40%] p-8 rounded-lg">
       <div v-if="isLoading" class="flex items-center justify-center w-full">
         <CustomSpinner :is-purple="true" />
-      </div>
-
-      <div v-else-if="errorMsg" class="flex items-center justify-center w-full">
-        <h2>{{ errorMsg }}</h2>
       </div>
 
       <div v-else>
@@ -70,10 +66,10 @@ import CustomSpinner from './CustomSpinner.vue'
 const profileName = ref('')
 const permissions = ref<Number[]>([])
 const isLoading = ref(false)
-const errorMsg = ref('')
 
 const props = defineProps<{
   onCancel: () => void
+  onConfirm: () => void
 }>()
 
 const setProfileName = (name: string) => {
@@ -96,11 +92,11 @@ const onSubmitProfile = async () => {
     const resp = await createProfile(profileName.value, permissions.value)
     if (resp) {
       toast.success('Perfil criado com sucesso!')
-      props.onCancel()
+      props.onConfirm()
     }
   } catch (error: any) {
     console.error(error)
-    errorMsg.value = error
+    toast.error(error)
   } finally {
     isLoading.value = true
   }
