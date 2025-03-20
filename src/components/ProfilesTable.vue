@@ -1,5 +1,11 @@
 <template>
-  <SettingsTableLayout>
+  <div v-if="isLoading" class="flex items-center justify-center w-full h-[80%]">
+    <CustomSpinner :is-purple="true" />
+  </div>
+  <div v-else-if="errorMsg" class="flex items-center justify-center w-full h-[80%]">
+    <h2>{{ errorMsg }}</h2>
+  </div>
+  <SettingsTableLayout v-else>
     <template v-slot:headers>
       <div class="table-cell w-2/12 py-1">Nome</div>
       <div class="table-cell w-2/12 py-1">Quantidade de Usuários</div>
@@ -7,7 +13,7 @@
     </template>
     <template v-slot:content>
       <div
-        v-for="(profile, index) in profiles.data"
+        v-for="(profile, index) in profiles"
         :key="index"
         class="table-row align-top odd:bg-white even:bg-gray-150 relative"
       >
@@ -30,8 +36,31 @@
 </template>
 
 <script setup lang="ts">
-import profiles from '@/assets/profiles.json'
 import SettingsTableLayout from './SettingsTableLayout.vue'
 import EditButton from './EditButton.vue'
 import RoundedLabel from './RoundedLabel.vue'
+import { onMounted, ref } from 'vue'
+import type IProfile from '@/shared/interfaces/IProfile'
+import { getProfiles } from '@/api/profiles'
+import CustomSpinner from './CustomSpinner.vue'
+
+const profiles = ref<IProfile[]>([])
+const isLoading = ref(false)
+const errorMsg = ref('')
+
+onMounted(() => {
+  fetchProfiles()
+})
+
+const fetchProfiles = async () => {
+  isLoading.value = true
+  try {
+    const response = await getProfiles()
+    profiles.value = response.data
+  } catch (error: any) {
+    errorMsg.value = error
+  } finally {
+    isLoading.value = false
+  }
+}
 </script>
