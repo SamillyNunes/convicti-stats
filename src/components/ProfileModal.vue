@@ -2,7 +2,7 @@
   <ModalLayout
     :onCancelButton="onCancel"
     :onConfirmButton="onSubmitProfile"
-    :is-updating-fields="selectedProfile !== null"
+    :is-updating-fields="selectedProfile !== undefined"
     title="Novo Perfil"
     subtitle="Dashboard"
     :is-loading="isLoading"
