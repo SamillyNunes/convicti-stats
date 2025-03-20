@@ -46,23 +46,9 @@ import type IProfile from '@/shared/interfaces/IProfile'
 import { getProfiles } from '@/api/profiles'
 import CustomSpinner from './CustomSpinner.vue'
 
-const profiles = ref<IProfile[]>([])
-const isLoading = ref(false)
-const errorMsg = ref('')
-
-onMounted(() => {
-  fetchProfiles()
-})
-
-const fetchProfiles = async () => {
-  isLoading.value = true
-  try {
-    const response = await getProfiles()
-    profiles.value = response.data
-  } catch (error: any) {
-    errorMsg.value = error
-  } finally {
-    isLoading.value = false
-  }
-}
+defineProps<{
+  profiles: IProfile[]
+  isLoading: boolean
+  errorMsg?: string
+}>()
 </script>

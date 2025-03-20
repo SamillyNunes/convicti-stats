@@ -8,7 +8,11 @@
         <AddButton @click="toggleProfileModal" />
       </div>
 
-      <ProfilesTable />
+      <ProfilesTable
+        :profiles="profiles"
+        :error-msg="profilesErrorMsg"
+        :is-loading="areProfilesLoading"
+      />
     </Card>
     <Card class="h-[40%]">
       <div class="flex justify-between items-center">
@@ -20,7 +24,11 @@
     </Card>
   </Layout>
 
-  <ProfileModal v-if="isProfileModalOpened" :onCancel="toggleProfileModal" />
+  <ProfileModal
+    v-if="isProfileModalOpened"
+    :onCancel="toggleProfileModal"
+    :onConfirm="onSuccessSubmitProfile"
+  />
 </template>
 
 <script setup lang="ts">
@@ -32,11 +40,38 @@ import Title from '@/components/Title.vue'
 import ProfilesTable from '@/components/ProfilesTable.vue'
 import UsersTable from '@/components/UsersTable.vue'
 import ProfileModal from '@/components/ProfileModal.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { getProfiles } from '@/api/profiles'
+import type IProfile from '@/shared/interfaces/IProfile'
 
 const isProfileModalOpened = ref(false)
 
 const toggleProfileModal = () => {
   isProfileModalOpened.value = !isProfileModalOpened.value
+}
+
+const profiles = ref<IProfile[]>([])
+const areProfilesLoading = ref(false)
+const profilesErrorMsg = ref('')
+
+onMounted(() => {
+  fetchProfiles()
+})
+
+const onSuccessSubmitProfile = () => {
+  fetchProfiles()
+  toggleProfileModal()
+}
+
+const fetchProfiles = async () => {
+  areProfilesLoading.value = true
+  try {
+    const response = await getProfiles()
+    profiles.value = response.data
+  } catch (error: any) {
+    profilesErrorMsg.value = error
+  } finally {
+    areProfilesLoading.value = false
+  }
 }
 </script>
