@@ -1,5 +1,11 @@
 <template>
-  <SettingsTableLayout>
+  <div v-if="isLoading" class="flex items-center justify-center w-full h-[80%]">
+    <CustomSpinner :is-purple="true" />
+  </div>
+  <div v-else-if="errorMsg" class="flex items-center justify-center w-full h-[80%]">
+    <h2>{{ errorMsg }}</h2>
+  </div>
+  <SettingsTableLayout v-else>
     <template v-slot:headers>
       <div class="table-cell w-2/12 py-1">Nome</div>
       <div class="table-cell w-3/12 py-1">Email</div>
@@ -8,7 +14,7 @@
     </template>
     <template v-slot:content>
       <div
-        v-for="(user, index) in users.data"
+        v-for="(user, index) in users"
         :key="index"
         class="table-row align-top odd:bg-white even:bg-gray-150 relative"
       >
@@ -30,6 +36,29 @@
 <script setup lang="ts">
 import EditButton from './EditButton.vue'
 import SettingsTableLayout from './SettingsTableLayout.vue'
-import users from '@/assets/users.json'
 import StatusLabel from './StatusLabel.vue'
+import { onMounted, ref } from 'vue'
+import { getUsers } from '@/api/users'
+import type IUser from '@/shared/interfaces/IUser'
+import CustomSpinner from './CustomSpinner.vue'
+
+const users = ref<IUser[]>([])
+const isLoading = ref(false)
+const errorMsg = ref('')
+
+onMounted(() => {
+  fetchUsers()
+})
+
+const fetchUsers = async () => {
+  isLoading.value = true
+  try {
+    const response = await getUsers()
+    users.value = response.data
+  } catch (error: any) {
+    errorMsg.value = error
+  } finally {
+    isLoading.value = false
+  }
+}
 </script>
