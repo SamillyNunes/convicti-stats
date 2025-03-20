@@ -46,13 +46,11 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import CustomInput from './CustomInput.vue'
 import ProfileOption from './ProfileOption.vue'
-import Subtitle from './Subtitle.vue'
 import { createProfile, updateProfile } from '@/api/profiles'
 import { toast } from 'vue3-toastify'
-import CustomSpinner from './CustomSpinner.vue'
 import type IProfile from '@/shared/interfaces/IProfile'
 import ModalLayout from './ModalLayout.vue'
 
