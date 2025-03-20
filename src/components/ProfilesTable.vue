@@ -20,7 +20,9 @@
         <div class="table-cell p-2">{{ profile.name }}</div>
         <div class="table-cell py-2">{{ profile.total_users }}</div>
         <div class="table-cell py-2">
+          <RoundedLabel v-if="profile.permissions.length === 5" label="Tudo" />
           <RoundedLabel
+            v-else
             v-for="(permission, index) in profile.permissions"
             :key="index"
             :label="permission.name"
