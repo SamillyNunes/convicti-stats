@@ -18,10 +18,10 @@
     <Card class="h-[40%]">
       <div class="flex justify-between items-center">
         <Subtitle subtitle="Usuários" />
-        <AddButton />
+        <AddButton @click="toggleUserModal" />
       </div>
 
-      <UsersTable />
+      <UsersTable @on-edit-user="(u: IUser) => onEditUser(u)" />
     </Card>
   </Layout>
 
@@ -30,6 +30,14 @@
     :selected-profile="selectedProfile"
     :onCancel="onCloseProfileModal"
     :onConfirm="onSuccessSubmitProfile"
+  />
+
+  <UserModal
+    v-if="isUserModalOpened"
+    :onCancel="onCloseUserModal"
+    :selected-user="selectedUser"
+    :onConfirm="() => {}"
+    :profiles="profiles"
   />
 </template>
 
@@ -45,21 +53,29 @@ import ProfileModal from '@/components/ProfileModal.vue'
 import { onMounted, ref } from 'vue'
 import { getProfiles } from '@/api/profiles'
 import type IProfile from '@/shared/interfaces/IProfile'
+import UserModal from '@/components/UserModal.vue'
+import type IUser from '@/shared/interfaces/IUser'
 
 const isProfileModalOpened = ref(false)
-
-const toggleProfileModal = () => {
-  isProfileModalOpened.value = !isProfileModalOpened.value
-}
+const isUserModalOpened = ref(false)
 
 const profiles = ref<IProfile[]>([])
 const areProfilesLoading = ref(false)
 const profilesErrorMsg = ref('')
 const selectedProfile = ref<IProfile | undefined>()
+const selectedUser = ref<IUser | undefined>()
 
 onMounted(() => {
   fetchProfiles()
 })
+
+const toggleProfileModal = () => {
+  isProfileModalOpened.value = !isProfileModalOpened.value
+}
+
+const toggleUserModal = () => {
+  isUserModalOpened.value = !isUserModalOpened.value
+}
 
 const onSuccessSubmitProfile = () => {
   fetchProfiles()
@@ -72,9 +88,19 @@ const onCloseProfileModal = () => {
   selectedProfile.value = undefined
 }
 
+const onCloseUserModal = () => {
+  toggleUserModal()
+  selectedUser.value = undefined
+}
+
 const onEditProfile = (profile: IProfile) => {
   selectedProfile.value = profile
   toggleProfileModal()
+}
+
+const onEditUser = (u: IUser) => {
+  selectedUser.value = u
+  toggleUserModal()
 }
 
 const fetchProfiles = async () => {

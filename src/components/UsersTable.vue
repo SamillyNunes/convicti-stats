@@ -26,7 +26,10 @@
         </div>
 
         <div class="relative table-cell">
-          <EditButton class="absolute top-[50%] -translate-y-[50%]" />
+          <EditButton
+            @click="$emit('onEditUser', user)"
+            class="absolute top-[50%] -translate-y-[50%]"
+          />
         </div>
       </div>
     </template>
@@ -45,6 +48,8 @@ import CustomSpinner from './CustomSpinner.vue'
 const users = ref<IUser[]>([])
 const isLoading = ref(false)
 const errorMsg = ref('')
+
+const emit = defineEmits(['onEditUser'])
 
 onMounted(() => {
   fetchUsers()
