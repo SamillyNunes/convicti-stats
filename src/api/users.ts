@@ -16,6 +16,20 @@ export const getUsers = async () => {
   }
 }
 
+export const getLoggedUser = async () => {
+  try {
+    const resp = await axiosInstance.get('/api/v1/me', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return resp.data
+  } catch (error) {
+    const e = error as AxiosError
+    throw new Error(handleApiError(e))
+  }
+}
+
 export const createUser = async (name: string, email: string, profileId: string) => {
   try {
     const payload = {
