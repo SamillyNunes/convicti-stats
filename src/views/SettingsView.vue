@@ -21,7 +21,10 @@
         <AddButton @click="toggleUserModal" />
       </div>
 
-      <UsersTable @on-edit-user="(u: IUser) => onEditUser(u)" />
+      <UsersTable
+        @on-edit-user="(u: IUser) => onEditUser(u)"
+        :fetch-users-again="fetchUsersAgain"
+      />
     </Card>
   </Layout>
 
@@ -36,8 +39,9 @@
     v-if="isUserModalOpened"
     :onCancel="onCloseUserModal"
     :selected-user="selectedUser"
-    :onConfirm="() => {}"
+    :onConfirm="onSuccessSubmitUser"
     :profiles="profiles"
+    @fetchUsersAgain="toggleFetchUsersAgain"
   />
 </template>
 
@@ -58,6 +62,8 @@ import type IUser from '@/shared/interfaces/IUser'
 
 const isProfileModalOpened = ref(false)
 const isUserModalOpened = ref(false)
+// independente de ser true ou false, se mudar vai atualizar na UsersTable:
+const fetchUsersAgain = ref(false)
 
 const profiles = ref<IProfile[]>([])
 const areProfilesLoading = ref(false)
@@ -77,10 +83,20 @@ const toggleUserModal = () => {
   isUserModalOpened.value = !isUserModalOpened.value
 }
 
+const toggleFetchUsersAgain = () => {
+  fetchUsersAgain.value = !fetchUsersAgain.value
+}
+
 const onSuccessSubmitProfile = () => {
   fetchProfiles()
   toggleProfileModal()
   selectedProfile.value = undefined
+}
+
+const onSuccessSubmitUser = () => {
+  fetchProfiles() // para que carregue o novo valor de usuarios por perfil
+  toggleUserModal()
+  selectedUser.value = undefined
 }
 
 const onCloseProfileModal = () => {

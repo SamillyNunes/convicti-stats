@@ -40,7 +40,7 @@
 import EditButton from './EditButton.vue'
 import SettingsTableLayout from './SettingsTableLayout.vue'
 import StatusLabel from './StatusLabel.vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { getUsers } from '@/api/users'
 import type IUser from '@/shared/interfaces/IUser'
 import CustomSpinner from './CustomSpinner.vue'
@@ -49,11 +49,22 @@ const users = ref<IUser[]>([])
 const isLoading = ref(false)
 const errorMsg = ref('')
 
+const props = defineProps({
+  fetchUsersAgain: Boolean,
+})
+
 const emit = defineEmits(['onEditUser'])
 
 onMounted(() => {
   fetchUsers()
 })
+
+watch(
+  () => props.fetchUsersAgain,
+  () => {
+    fetchUsers()
+  },
+)
 
 const fetchUsers = async () => {
   isLoading.value = true

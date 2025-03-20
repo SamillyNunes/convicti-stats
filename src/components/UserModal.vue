@@ -1,7 +1,7 @@
 <template>
   <ModalLayout
     :onCancelButton="onCancel"
-    :onConfirmButton="() => {}"
+    :onConfirmButton="onSubmitUser"
     :is-updating-fields="selectedUser !== undefined"
     title="Novo Usuário"
     subtitle="Perfil"
@@ -38,12 +38,11 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue'
 import CustomInput from './CustomInput.vue'
-import ProfileOption from './ProfileOption.vue'
-import { createProfile, updateProfile } from '@/api/profiles'
 import { toast } from 'vue3-toastify'
 import type IProfile from '@/shared/interfaces/IProfile'
 import ModalLayout from './ModalLayout.vue'
 import type IUser from '@/shared/interfaces/IUser'
+import { createUser, updateUser } from '@/api/users'
 
 const username = ref('')
 const email = ref('')
@@ -57,6 +56,8 @@ const props = defineProps<{
   selectedUser?: IUser
 }>()
 
+const emit = defineEmits(['fetchUsersAgain'])
+
 onBeforeMount(() => {
   checkSelectedUser()
 })
@@ -65,10 +66,6 @@ const checkSelectedUser = () => {
   if (props.selectedUser) {
     username.value = props.selectedUser.name
     email.value = props.selectedUser.email
-    console.log('selected:')
-    console.log(props.selectedUser)
-    console.log(props.selectedUser.profile_id)
-    console.log(profileId.value)
     profileId.value = props.selectedUser.profile_id.toString()
   }
 }
@@ -81,24 +78,31 @@ const setEmail = (e: string) => {
   email.value = e
 }
 
-// const onSubmitProfile = async () => {
-//   isLoading.value = true
-//   try {
-//     var response
-//     if (props.selectedProfile) {
-//       response = await updateProfile(props.selectedProfile.id, profileName.value, permissions.value)
-//     } else {
-//       response = await createProfile(profileName.value, permissions.value)
-//     }
-//     if (response) {
-//       toast.success(`Perfil ${props.selectedProfile ? 'atualizado' : 'criado'} com sucesso!`)
-//       props.onConfirm()
-//     }
-//   } catch (error: any) {
-//     console.error(error)
-//     toast.error(error)
-//   } finally {
-//     isLoading.value = true
-//   }
-// }
+const onSubmitUser = async () => {
+  isLoading.value = true
+  try {
+    var response
+    if (props.selectedUser) {
+      response = await updateUser(
+        props.selectedUser.id,
+        username.value,
+        email.value,
+        profileId.value,
+      )
+    } else {
+      response = await createUser(username.value, email.value, profileId.value)
+    }
+
+    if (response) {
+      toast.success(`Usuário ${props.selectedUser ? 'atualizado' : 'criado'} com sucesso!`)
+      props.onConfirm()
+      emit('fetchUsersAgain')
+    }
+  } catch (error: any) {
+    console.error(error)
+    toast.error(error)
+  } finally {
+    isLoading.value = true
+  }
+}
 </script>
