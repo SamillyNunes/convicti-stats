@@ -10,6 +10,22 @@ export const useAuthStore = defineStore('auth', () => {
 
   const isAuthenticated = computed(() => !!token.value)
 
+  const downloadsAllowed = computed(() =>
+    user.value?.profile.permissions.some((p) => Number(p.id) === 1),
+  )
+  const evaluationsAllowed = computed(() =>
+    user.value?.profile.permissions.some((p) => Number(p.id) === 2),
+  )
+  const errorsAllowed = computed(() =>
+    user.value?.profile.permissions.some((p) => Number(p.id) === 3),
+  )
+  const feedbacksAllowed = computed(() =>
+    user.value?.profile.permissions.some((p) => Number(p.id) === 4),
+  )
+  const featuresAllowed = computed(() =>
+    user.value?.profile.permissions.some((p) => Number(p.id) === 5),
+  )
+
   async function loginUser(username: string, password: string) {
     try {
       const data = await login(username, password)
@@ -35,6 +51,11 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  function setUser(u: string) {
+    const converted = JSON.parse(u) as IUser
+    user.value = converted
+  }
+
   function logoutUser() {
     logout()
     localStorage.removeItem('user')
@@ -45,7 +66,13 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     user,
     isAuthenticated,
+    downloadsAllowed,
+    evaluationsAllowed,
+    errorsAllowed,
+    feedbacksAllowed,
+    featuresAllowed,
     loginUser,
     logoutUser,
+    setUser,
   }
 })
