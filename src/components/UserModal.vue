@@ -47,7 +47,7 @@ import type IUser from '@/shared/interfaces/IUser'
 
 const username = ref('')
 const email = ref('')
-const profileId = ref('')
+const profileId = ref('1')
 const isLoading = ref(false)
 
 const props = defineProps<{
