@@ -30,7 +30,10 @@
           <RoundedLabel v-if="profile.permissions.length === 0" label="Nenhuma" />
         </div>
         <div class="relative table-cell">
-          <EditButton class="absolute top-[50%] -translate-y-[50%]" />
+          <EditButton
+            @click="$emit('onEditProfile', profile)"
+            class="absolute top-[50%] -translate-y-[50%]"
+          />
         </div>
       </div>
     </template>
@@ -41,9 +44,7 @@
 import SettingsTableLayout from './SettingsTableLayout.vue'
 import EditButton from './EditButton.vue'
 import RoundedLabel from './RoundedLabel.vue'
-import { onMounted, ref } from 'vue'
 import type IProfile from '@/shared/interfaces/IProfile'
-import { getProfiles } from '@/api/profiles'
 import CustomSpinner from './CustomSpinner.vue'
 
 defineProps<{
@@ -51,4 +52,6 @@ defineProps<{
   isLoading: boolean
   errorMsg?: string
 }>()
+
+const emit = defineEmits(['onEditProfile'])
 </script>

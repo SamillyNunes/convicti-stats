@@ -12,6 +12,7 @@
         :profiles="profiles"
         :error-msg="profilesErrorMsg"
         :is-loading="areProfilesLoading"
+        @onEditProfile="(p: IProfile) => onEditProfile(p)"
       />
     </Card>
     <Card class="h-[40%]">
@@ -26,7 +27,8 @@
 
   <ProfileModal
     v-if="isProfileModalOpened"
-    :onCancel="toggleProfileModal"
+    :selected-profile="selectedProfile"
+    :onCancel="onCloseProfileModal"
     :onConfirm="onSuccessSubmitProfile"
   />
 </template>
@@ -53,6 +55,7 @@ const toggleProfileModal = () => {
 const profiles = ref<IProfile[]>([])
 const areProfilesLoading = ref(false)
 const profilesErrorMsg = ref('')
+const selectedProfile = ref<IProfile | undefined>()
 
 onMounted(() => {
   fetchProfiles()
@@ -60,6 +63,17 @@ onMounted(() => {
 
 const onSuccessSubmitProfile = () => {
   fetchProfiles()
+  toggleProfileModal()
+  selectedProfile.value = undefined
+}
+
+const onCloseProfileModal = () => {
+  toggleProfileModal()
+  selectedProfile.value = undefined
+}
+
+const onEditProfile = (profile: IProfile) => {
+  selectedProfile.value = profile
   toggleProfileModal()
 }
 

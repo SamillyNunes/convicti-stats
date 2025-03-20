@@ -10,15 +10,22 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, watchEffect } from 'vue'
+import { defineProps, onBeforeMount, ref, watchEffect } from 'vue'
 
 const value = ref('')
 
 const props = defineProps<{
   type?: 'text' | 'password' | 'email'
   placeholder?: string
+  inputValue?: string
   onChange: (value: string) => void
 }>()
+
+onBeforeMount(() => {
+  if (props.inputValue) {
+    value.value = props.inputValue
+  }
+})
 
 watchEffect(() => {
   props.onChange(value.value)

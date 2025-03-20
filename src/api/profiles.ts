@@ -35,3 +35,26 @@ export const createProfile = async (profileName: string, permissionsIds: Number[
     throw new Error(handleApiError(e))
   }
 }
+
+export const updateProfile = async (
+  profileId: string,
+  profileName: string,
+  permissionsIds: Number[],
+) => {
+  try {
+    const payload = {
+      name: profileName,
+      permissions: permissionsIds,
+    }
+
+    const resp = await axiosInstance.put(`/api/v1/profiles/${profileId}`, payload, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    return resp.data
+  } catch (error) {
+    const e = error as AxiosError
+    throw new Error(handleApiError(e))
+  }
+}
