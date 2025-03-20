@@ -30,7 +30,10 @@ const props = defineProps({
 
 const status = ref(props.isActive)
 
+const emit = defineEmits(['onChangeState'])
+
 const toggle = () => {
   status.value = !status.value
+  emit('onChangeState', status.value)
 }
 </script>
