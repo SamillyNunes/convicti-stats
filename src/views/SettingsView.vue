@@ -5,7 +5,7 @@
     <Card class="h-[40%]">
       <div class="flex justify-between items-center">
         <Subtitle subtitle="Perfis" />
-        <AddButton />
+        <AddButton @click="toggleProfileModal" />
       </div>
 
       <ProfilesTable />
@@ -20,7 +20,7 @@
     </Card>
   </Layout>
 
-  <ProfileModal />
+  <ProfileModal v-if="isProfileModalOpened" :onCancel="toggleProfileModal" />
 </template>
 
 <script setup lang="ts">
@@ -32,4 +32,11 @@ import Title from '@/components/Title.vue'
 import ProfilesTable from '@/components/ProfilesTable.vue'
 import UsersTable from '@/components/UsersTable.vue'
 import ProfileModal from '@/components/ProfileModal.vue'
+import { ref } from 'vue'
+
+const isProfileModalOpened = ref(false)
+
+const toggleProfileModal = () => {
+  isProfileModalOpened.value = !isProfileModalOpened.value
+}
 </script>
