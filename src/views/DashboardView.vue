@@ -54,7 +54,4 @@ import Title from '@/components/Title.vue'
 import { useAuthStore } from '@/stores/auth'
 
 const authStore = useAuthStore()
-
-console.log('dashboardd')
-console.log(authStore.user)
 </script>

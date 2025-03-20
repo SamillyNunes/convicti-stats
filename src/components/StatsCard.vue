@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-white !py-3 !px-6 flex flex-col rounded-lg">
+  <div class="w-[35%] bg-white !py-3 !px-6 flex flex-col rounded-lg">
     <div class="flex justify-between items-center">
       <h3 class="font-semibold text-gray-200 opacity-45">{{ title }}</h3>
       <img :src="iconUrl" :alt="alt" class="h-6" />
