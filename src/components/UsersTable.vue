@@ -8,35 +8,46 @@
 
   <NoItemsInfo v-else-if="users.length === 0" />
 
-  <SettingsTableLayout v-else>
-    <template v-slot:headers>
-      <div class="table-cell w-2/12 py-1">Nome</div>
-      <div class="table-cell w-3/12 py-1">Email</div>
-      <div class="table-cell w-5/12 py-1">Perfil</div>
-      <div class="table-cell w-2/12 py-1">Status</div>
-    </template>
-    <template v-slot:content>
-      <div
-        v-for="(user, index) in users"
-        :key="index"
-        class="table-row align-top odd:bg-white even:bg-gray-150 relative"
-      >
-        <div class="table-cell p-2">{{ user.name }}</div>
-        <div class="table-cell py-2">{{ user.email }}</div>
-        <div class="table-cell py-2">{{ user.profile.name }}</div>
-        <div class="table-cell py-2">
-          <StatusLabel :is-active="user.active" />
-        </div>
+  <div v-else>
+    <SettingsTableLayout class="max-h-56 md:h-min">
+      <template v-slot:headers>
+        <div class="table-cell w-2/12 py-1">Nome</div>
+        <div class="table-cell w-3/12 py-1">Email</div>
+        <div class="table-cell w-5/12 py-1">Perfil</div>
+        <div class="table-cell w-2/12 py-1">Status</div>
+      </template>
+      <template v-slot:content>
+        <div
+          v-for="(user, index) in users"
+          :key="index"
+          class="block div-row md:table-row align-top odd:bg-white even:bg-gray-150 relative"
+        >
+          <div class="block div-cell md:table-cell md:p-2" data-label="Nome">{{ user.name }}</div>
+          <div class="block div-cell md:table-cell py-2" data-label="Email">{{ user.email }}</div>
+          <div class="block div-cell md:table-cell py-2" data-label="Perfil">
+            {{ user.profile.name }}
+          </div>
+          <div class="block div-cell md:table-cell py-2" data-label="Status">
+            <StatusLabel :is-active="user.active" />
+          </div>
 
-        <div class="relative table-cell">
-          <EditButton
-            @click="$emit('onEditUser', user)"
-            class="absolute top-[50%] -translate-y-[50%]"
-          />
+          <div class="hidden md:table-cell relative">
+            <EditButton
+              @click="$emit('onEditUser', user)"
+              class="absolute top-[50%] -translate-y-[50%]"
+            />
+          </div>
+          <div class="table-cell md:hidden">
+            <AppButton
+              @click="$emit('onEditUser', user)"
+              label="Editar"
+              class="!mt-4 !w-full h-6"
+            />
+          </div>
         </div>
-      </div>
-    </template>
-  </SettingsTableLayout>
+      </template>
+    </SettingsTableLayout>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -48,6 +59,7 @@ import { getUsers } from '@/api/users'
 import type IUser from '@/shared/interfaces/IUser'
 import CustomSpinner from './CustomSpinner.vue'
 import NoItemsInfo from './NoItemsInfo.vue'
+import AppButton from './AppButton.vue'
 
 const users = ref<IUser[]>([])
 const isLoading = ref(false)
@@ -82,3 +94,20 @@ const fetchUsers = async () => {
   }
 }
 </script>
+
+<style lang="css" scoped>
+@media (max-width: 767px) {
+  .div-cell::before {
+    content: attr(data-label) ': ';
+    font-weight: bold;
+    display: block;
+    width: auto;
+  }
+  .div-row {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+}
+</style>

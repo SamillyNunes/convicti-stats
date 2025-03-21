@@ -44,7 +44,11 @@
             />
           </div>
           <div class="table-cell md:hidden">
-            <AppButton :onClick="() => {}" label="Editar" class="!mt-4 !w-full h-6" />
+            <AppButton
+              @click="$emit('onEditProfile', profile)"
+              label="Editar"
+              class="!mt-4 !w-full h-6"
+            />
           </div>
         </div>
       </template>
