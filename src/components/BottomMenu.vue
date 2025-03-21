@@ -1,24 +1,19 @@
 <template>
-  <div class="hidden md:flex flex-col h-full bg-white w-[25%] items-center !justify-between !py-8">
-    <div class="flex flex-col items-center">
-      <img src="../assets/images/logo.png" alt="Logo Convicti" class="h-14" />
-      <h4 class="font-bold tracking-[2px] !mt-7 !mb-4">PAINEL DE DADOS</h4>
-      <MenuButton
-        @click="goToDashboardView"
-        title="Dashboard"
-        :icon-url="dashboardIcon"
-        :is-active="isInsideDashboardView"
-      />
-    </div>
-    <div class="flex flex-col items-center">
-      <MenuButton
-        @click="goToSettingsView"
-        title="Configurações"
-        :icon-url="settingsIcon"
-        :is-active="!isInsideDashboardView"
-      />
-      <MenuButton @click="openDialog" title="Sair" :icon-url="exitIcon" :is-active="false" />
-    </div>
+  <div class="fixed bottom-0 flex w-full h-[10%] bg-white justify-around md:hidden">
+    <MenuButton
+      @click="goToDashboardView"
+      title="Dashboard"
+      :icon-url="dashboardIcon"
+      :is-active="isInsideDashboardView"
+    />
+    <MenuButton
+      @click="goToSettingsView"
+      title="Configurações"
+      :icon-url="settingsIcon"
+      :is-active="!isInsideDashboardView"
+    />
+
+    <MenuButton @click="openDialog" title="Sair" :icon-url="exitIcon" :is-active="false" />
   </div>
 
   <ConfirmDialog
