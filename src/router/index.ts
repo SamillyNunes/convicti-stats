@@ -25,6 +25,10 @@ const router = createRouter({
         auth: true,
       },
     },
+    {
+      path: '/:pathMatch(.*)*',
+      component: () => import('../views/NotFoundView.vue'),
+    },
   ],
 })
 
