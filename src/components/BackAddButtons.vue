@@ -7,17 +7,13 @@
     >
       Voltar
     </button>
-    <button
-      @click="onConfirm"
-      type="button"
-      class="bg-blue/20 text-purple-2 text-xs font-semibold w-[60%] rounded-[0.35rem] hover:bg-main-purple/50 hover:text-white duration-200 cursor-pointer"
-    >
-      {{ isUpdating ? 'Atualizar' : 'Adicionar' }}
-    </button>
+    <AppButton :onClick="onConfirm" :label="`${isUpdating ? 'Atualizar' : 'Adicionar'}`" />
   </div>
 </template>
 
 <script setup lang="ts">
+import AppButton from './AppButton.vue'
+
 defineProps<{
   onCancel: () => void
   onConfirm: () => void

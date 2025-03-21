@@ -1,7 +1,7 @@
 <template>
   <div class="table w-full border-collapse border-spacing-y-2">
     <div
-      class="table-header-group font-normal text-xs text-gray-200 opacity-40 text-left border-t border-b border-t-black/10 border-b-black/10"
+      class="hidden md:table-header-group font-normal text-xs text-gray-200 opacity-40 text-left border-t border-b border-t-black/10 border-b-black/10"
     >
       <div class="table-row">
         <slot name="headers"></slot>
