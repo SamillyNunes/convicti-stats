@@ -13,7 +13,7 @@
       <template v-slot:headers>
         <div class="table-cell w-2/12 py-1">Nome</div>
         <div class="table-cell w-3/12 py-1">Email</div>
-        <div class="table-cell w-5/12 py-1">Perfil</div>
+        <div class="table-cell md:w-3/12 lg:w-5/12 py-1">Perfil</div>
         <div class="table-cell w-2/12 py-1">Status</div>
       </template>
       <template v-slot:content>
