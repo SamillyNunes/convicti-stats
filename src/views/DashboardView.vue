@@ -52,8 +52,6 @@ import FeaturesCard from '@/components/FeaturesCard.vue'
 import Layout from '@/components/Layout.vue'
 import Title from '@/components/Title.vue'
 import { useAuthStore } from '@/stores/auth'
-import { onMounted, ref } from 'vue'
-import { getDownloads } from '@/api/stats'
 import { useDownloads } from '@/composables/useDownloads'
 
 const authStore = useAuthStore()
