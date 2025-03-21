@@ -1,39 +1,94 @@
-# convicti-stats
+# CONVICTI Analytics
 
-This template should help get you started developing with Vue 3 in Vite.
+Aplicação frontend utilizando Vue que permita ao usuário acessar e visualizar estatísticas de uso de uma aplicação. A visualização dos dados estatísticos dependerá do nível de permissão do usuário. Desenvolvida para um desafio técnico de Front-End.
 
-## Recommended IDE Setup
+## Capturas de tela e demonstração
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+#### Fluxo de funcionalidades e telas - Desktop:
 
-## Type Support for `.vue` Imports in TS
+https://github.com/user-attachments/assets/604ce7d9-d12c-42e0-8206-d6b8f027957a
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+#### Fluxo de funcionalidades e telas - Mobile:
 
-## Customize configuration
+https://github.com/user-attachments/assets/56ad2731-de00-498b-9140-0688b8b75c66
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## 🚀 Tecnologias Utilizadas
 
-## Project Setup
+Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
-```sh
-npm install
+- **Vue.js 3**
+- **Vite**
+- **TypeScript**
+- **TailwindCSS**
+- **Axios**
+- **Toastify**
+- **Pinia**
+
+## 📂 Estrutura do Projeto
+
+```plaintext
+📂 convicti-stats
+├── 📂 src
+│   ├── 📂 api  # Requisições para a API
+│   ├── 📂 assets      # Imagens e arquivos estáticos
+│   ├── 📂 components  # Componentes reutilizáveis
+│   ├── 📂 composables # Lógicas reutilizáveis de alguns componentes ou páginas
+│   ├── 📂 views       # Páginas principais
+│   ├── 📂 router      # Rotas da aplicação
+│   ├── 📂 services    # Requisições HTTP
+│   ├── 📂 store       # Gerenciamento de estado com o Pinia
+│   ├── 📂 utils       # Funções úteis para a aplicação
+│   ├── App.vue        # Componente raiz
+│   ├── main.ts        # Ponto de entrada do Vue
+├── 📜 package.json
+├── 📜 vite.config.ts
+└── ...
 ```
 
-### Compile and Hot-Reload for Development
+## 🔧 Como Rodar o Projeto
 
-```sh
-npm run dev
-```
+Antes de tudo, você deve saber que para conseguir rodar o projeto precisa ter o Node.js instalado em sua máquina. Se quiser saber mais, [visualize a documentação aqui](https://nodejs.org/pt). 
 
-### Type-Check, Compile and Minify for Production
+Node.js instalado, então bora:
 
-```sh
-npm run build
-```
+Siga os passos abaixo para rodar o projeto localmente:
 
-### Lint with [ESLint](https://eslint.org/)
+1. **Clone este repositório:**
+   ```sh
+   git clone https://github.com/seu-usuario/nome-do-projeto.git
+   ```
 
-```sh
-npm run lint
-```
+2. **Acesse a pasta do projeto:**
+   ```sh
+   cd convicti-stats
+   ```
+
+3. **Instale as dependências:**
+   ```sh
+   npm install
+   ```
+
+4. **Inicie o servidor de desenvolvimento:**
+   ```sh
+   npm run dev
+   ```
+
+O projeto estará disponível em `http://localhost:5173/`.
+
+- ⚠️ Atenção: Aqui você deve saber que, para que a integração com o backend funcione normalmente, é necessário que, caso tenha acesso, implemente a permissão das requisições vinda desta origem para não ter **problemas com o CORS**. Caso isso não seja possível, recomendo o uso [desta extensão do Google Chrome](https://chromewebstore.google.com/detail/digfbfaphojjndkpccljibejjbppifbc?utm_source=item-share-cb) ou uma similar que possa ativar o CORS na página apenas enquanto roda o projeto.  
+
+## 📌 Funcionalidades Implementadas
+
+- ✅ **Login**
+- ✅ **Logout**
+- ✅ **Rotas privadas (acesso a Dashboard e Configurações apenas para usuários logados)**
+- ✅ **Permissões por usuário**
+- ✅ **Busca e cálculos de informações de Downloads, Avaliações, Erros, Feedbacks, e Novas Funcionalidades**
+- ✅ **Criação, atualização e apresentação de informações de Perfil e Usuário**
+- ✅ **Apresenta informação quando não há nenhum item no backend**
+- ✅ **Consumo de API com Axios**
+- ✅ **Estilização com TailwindCSS**
+- ✅ **Notificações locais em casos de erros e sucessos**
+- ✅ **Responsividade em telas desde mobile até desktops**
+
+
