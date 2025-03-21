@@ -74,7 +74,7 @@ const handleLogin = async () => {
   try {
     const isLogged = await authStore.loginUser(username.value, password.value)
     if (isLogged) {
-      router.push('/dashboard')
+      router.push({ name: 'dashboard' })
     }
   } catch (error: any) {
     console.log('entrou no catch do login')

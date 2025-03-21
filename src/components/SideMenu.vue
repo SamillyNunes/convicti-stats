@@ -58,6 +58,6 @@ const goToSettingsView = () => {
 }
 
 const goToDashboardView = () => {
-  router.push('/dashboard')
+  router.push({ name: 'dashboard' })
 }
 </script>
