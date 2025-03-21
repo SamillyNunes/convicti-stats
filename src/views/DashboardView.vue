@@ -2,7 +2,7 @@
   <Layout>
     <Title title="Estatísticas" />
 
-    <div class="flex flex-col md:flex-row justify-between md:gap-2 lg:gap-6 !mt-5">
+    <div class="flex flex-col md:flex-row justify-between gap-2 lg:gap-6 !mt-5">
       <StatsCard
         v-if="authStore.downloadsAllowed"
         title="Downloads"
