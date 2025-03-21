@@ -11,7 +11,7 @@
       </thead>
       <tbody class="text-[0.65rem] text-gray-200">
         <tr
-          v-for="(feature, index) in features.data.data"
+          v-for="(feature, index) in allNewFeatures"
           :key="index"
           class="align-top odd:bg-white even:bg-gray-150"
         >
@@ -26,7 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import features from '@/assets/features.json'
+import { useFeatures } from '@/composables/useFeatures'
 import Card from './Card.vue'
 import Subtitle from './Subtitle.vue'
+
+const { allNewFeatures } = useFeatures()
 </script>

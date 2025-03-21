@@ -52,3 +52,21 @@ export const getErrors = async (page?: number) => {
     throw new Error(handleApiError(e))
   }
 }
+
+export const getNewFeatures = async (page?: number) => {
+  try {
+    const resp = await axiosInstance.get('/api/v1/features', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        is_new: 1,
+        page: page,
+      },
+    })
+    return resp.data
+  } catch (error) {
+    const e = error as AxiosError
+    throw new Error(handleApiError(e))
+  }
+}
