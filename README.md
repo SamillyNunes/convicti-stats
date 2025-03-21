@@ -55,7 +55,7 @@ Siga os passos abaixo para rodar o projeto localmente:
 
 1. **Clone este repositório:**
    ```sh
-   git clone https://github.com/seu-usuario/nome-do-projeto.git
+   git clone https://github.com/SamillyNunes/convicti-stats.git
    ```
 
 2. **Acesse a pasta do projeto:**
