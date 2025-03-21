@@ -2,7 +2,7 @@ import { getEvaluations } from '@/api/stats'
 import { onMounted, ref } from 'vue'
 
 export function useEvaluations() {
-  const allEvaluations = ref(0)
+  const allEvaluationsCount = ref(0)
   const androidEvaluations = ref(0)
   const iosEvaluations = ref(0)
 
@@ -22,7 +22,7 @@ export function useEvaluations() {
         const response = await getEvaluations(currentPage)
 
         response.data.data.forEach((evaluation: any) => {
-          allEvaluations.value += 1
+          allEvaluationsCount.value += 1
           if (evaluation.platform === 'ANDROID') {
             androidEvaluations.value += 1
           }
@@ -44,7 +44,7 @@ export function useEvaluations() {
   }
 
   return {
-    allEvaluations,
+    allEvaluationsCount,
     androidEvaluations,
     iosEvaluations,
     isEvaluationsLoading,

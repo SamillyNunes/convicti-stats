@@ -21,7 +21,7 @@
         :android-value="androidEvaluations.toString()"
         :apple-value="iosEvaluations.toString()"
       >
-        <h1 class="font-bold text-[2.5rem]">{{ allEvaluations }}</h1>
+        <h1 class="font-bold text-[2.5rem]">{{ allEvaluationsCount }}</h1>
       </StatsCard>
       <StatsCard
         v-if="authStore.errorsAllowed"
@@ -59,6 +59,6 @@ import { useErrors } from '@/composables/useErrors'
 const authStore = useAuthStore()
 
 const { allDownloads, androidDownloads, iosDownloads } = useDownloads()
-const { allEvaluations, androidEvaluations, iosEvaluations } = useEvaluations()
+const { allEvaluationsCount, androidEvaluations, iosEvaluations } = useEvaluations()
 const { allErrors, androidErrors, iosErrors } = useErrors()
 </script>
