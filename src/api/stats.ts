@@ -18,3 +18,20 @@ export const getDownloads = async (page?: number) => {
     throw new Error(handleApiError(e))
   }
 }
+
+export const getEvaluations = async (page?: number) => {
+  try {
+    const resp = await axiosInstance.get('/api/v1/evaluations', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        page: page,
+      },
+    })
+    return resp.data
+  } catch (error) {
+    const e = error as AxiosError
+    throw new Error(handleApiError(e))
+  }
+}

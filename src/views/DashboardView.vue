@@ -18,10 +18,10 @@
         title="Avaliações"
         :icon-url="starsIcon"
         alt="Ícone representando estrelas dadas em avaliações"
-        android-value="5.0"
-        apple-value="4.0"
+        :android-value="androidEvaluations.toString()"
+        :apple-value="iosEvaluations.toString()"
       >
-        <h1 class="font-bold text-[2.5rem]">330</h1>
+        <h1 class="font-bold text-[2.5rem]">{{ allEvaluations }}</h1>
       </StatsCard>
       <StatsCard
         v-if="authStore.errorsAllowed"
@@ -53,8 +53,10 @@ import Layout from '@/components/Layout.vue'
 import Title from '@/components/Title.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useDownloads } from '@/composables/useDownloads'
+import { useEvaluations } from '@/composables/useEvaluations'
 
 const authStore = useAuthStore()
 
 const { allDownloads, androidDownloads, iosDownloads } = useDownloads()
+const { allEvaluations, androidEvaluations, iosEvaluations } = useEvaluations()
 </script>
