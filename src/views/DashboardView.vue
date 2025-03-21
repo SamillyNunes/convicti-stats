@@ -8,10 +8,10 @@
         title="Downloads"
         :icon-url="cloudIcon"
         alt="Ícone de nuvem"
-        android-value="240"
-        apple-value="90"
+        :android-value="androidDownloads.toString()"
+        :apple-value="iosDownloads.toString()"
       >
-        <h1 class="font-bold text-[2.5rem]">330</h1>
+        <h1 class="font-bold text-[2.5rem]">{{ allDownloads }}</h1>
       </StatsCard>
       <StatsCard
         v-if="authStore.evaluationsAllowed"
@@ -52,6 +52,49 @@ import FeaturesCard from '@/components/FeaturesCard.vue'
 import Layout from '@/components/Layout.vue'
 import Title from '@/components/Title.vue'
 import { useAuthStore } from '@/stores/auth'
+import { onMounted, ref } from 'vue'
+import { getDownloads } from '@/api/stats'
 
 const authStore = useAuthStore()
+
+const allDownloads = ref(0)
+const androidDownloads = ref(0)
+const iosDownloads = ref(0)
+
+const isDownloadsLoading = ref(false)
+
+onMounted(() => {
+  fetchDownloads()
+})
+
+const fetchDownloads = async () => {
+  isDownloadsLoading.value = true
+  try {
+    let currentPage = 1
+    let totalPages = 1
+
+    while (currentPage <= totalPages) {
+      const response = await getDownloads(currentPage)
+
+      response.data.data.forEach((download: any) => {
+        allDownloads.value += 1
+        if (download.platform === 'ANDROID') {
+          androidDownloads.value += 1
+        }
+        if (download.platform === 'IOS') {
+          iosDownloads.value += 1
+        }
+      })
+
+      totalPages = response.data.last_page
+      currentPage++
+
+      console.log(response)
+    }
+  } catch (error) {
+    console.error(error)
+  } finally {
+    isDownloadsLoading.value = false
+  }
+}
 </script>
