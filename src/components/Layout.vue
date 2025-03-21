@@ -1,6 +1,6 @@
 <template>
   <div class="w-screen h-screen">
-    <div class="flex">
+    <div class="flex md:w-full md:h-full">
       <SideMenu />
       <div class="flex flex-col h-full w-full bg-gray-100 !py-5 !px-10">
         <slot></slot>

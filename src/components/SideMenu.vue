@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden md:flex flex-col h-full bg-white w-[25%] items-center !justify-between !py-8">
+  <div class="hidden md:flex flex-col h-full bg-white w-[25%] items-center justify-between py-8">
     <div class="flex flex-col items-center">
       <img src="../assets/images/logo.png" alt="Logo Convicti" class="h-14" />
       <h4 class="font-bold tracking-[2px] !mt-7 !mb-4">PAINEL DE DADOS</h4>
