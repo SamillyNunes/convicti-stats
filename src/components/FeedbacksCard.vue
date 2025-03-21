@@ -14,7 +14,7 @@
       </thead>
       <tbody class="text-[0.65rem] text-gray-200">
         <tr
-          v-for="(evaluation, index) in evaluations.data.data"
+          v-for="(evaluation, index) in evaluations"
           :key="index"
           class="align-top odd:bg-gray-150 even:bg-white"
         >
@@ -37,7 +37,11 @@
 </template>
 
 <script setup lang="ts">
-import evaluations from '@/assets/evaluations.json'
 import Card from './Card.vue'
 import Subtitle from './Subtitle.vue'
+import type IEvaluation from '@/shared/interfaces/IEvaluation'
+
+defineProps<{
+  evaluations: IEvaluation[]
+}>()
 </script>

@@ -1,10 +1,13 @@
 import { getEvaluations } from '@/api/stats'
+import type IEvaluation from '@/shared/interfaces/IEvaluation'
 import { onMounted, ref } from 'vue'
 
 export function useEvaluations() {
   const allEvaluationsCount = ref(0)
   const androidEvaluations = ref(0)
   const iosEvaluations = ref(0)
+
+  const allEvaluations = ref<IEvaluation[]>([])
 
   const isEvaluationsLoading = ref(false)
 
@@ -21,8 +24,9 @@ export function useEvaluations() {
       while (currentPage <= totalPages) {
         const response = await getEvaluations(currentPage)
 
-        response.data.data.forEach((evaluation: any) => {
+        response.data.data.forEach((evaluation: IEvaluation) => {
           allEvaluationsCount.value += 1
+          allEvaluations.value.push(evaluation)
           if (evaluation.platform === 'ANDROID') {
             androidEvaluations.value += 1
           }
@@ -47,6 +51,7 @@ export function useEvaluations() {
     allEvaluationsCount,
     androidEvaluations,
     iosEvaluations,
+    allEvaluations,
     isEvaluationsLoading,
     fetchEvaluations,
   }

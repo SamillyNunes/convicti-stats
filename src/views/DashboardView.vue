@@ -36,7 +36,7 @@
       </StatsCard>
     </div>
 
-    <FeedbacksCard v-if="authStore.feedbacksAllowed" />
+    <FeedbacksCard v-if="authStore.feedbacksAllowed" :evaluations="allEvaluations" />
 
     <FeaturesCard v-if="authStore.featuresAllowed" />
   </Layout>
@@ -59,6 +59,6 @@ import { useErrors } from '@/composables/useErrors'
 const authStore = useAuthStore()
 
 const { allDownloads, androidDownloads, iosDownloads } = useDownloads()
-const { allEvaluationsCount, androidEvaluations, iosEvaluations } = useEvaluations()
+const { allEvaluationsCount, androidEvaluations, iosEvaluations, allEvaluations } = useEvaluations()
 const { allErrors, androidErrors, iosErrors } = useErrors()
 </script>
