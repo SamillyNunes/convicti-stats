@@ -58,7 +58,7 @@ defineProps<{
 </script>
 
 <style lang="css" scoped>
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   td::before {
     content: attr(data-label) ': ';
     font-weight: bold;
