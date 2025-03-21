@@ -1,6 +1,6 @@
 <template>
   <div class="fixed inset-0 bg-black/30 flex justify-center items-center z-50">
-    <div class="bg-gray-100 w-[40%] p-8 rounded-lg">
+    <div class="bg-gray-100 w-[85%] md:w-[40%] p-8 rounded-lg">
       <div v-if="isLoading" class="flex items-center justify-center w-full">
         <CustomSpinner :is-purple="true" />
       </div>

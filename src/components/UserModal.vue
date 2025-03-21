@@ -17,19 +17,21 @@
       <CustomInput placeholder="Email" type="email" :input-value="email" :onChange="setEmail" />
     </template>
     <template v-slot:choices>
-      <div
-        class="flex justify-between items-center pb-4"
-        v-for="(profile, index) in profiles"
-        :key="index"
-      >
-        <label :for="profile.id" class="font-normal text-sm text-black">{{ profile.name }}</label>
-        <input
-          type="radio"
-          :id="profile.id"
-          :value="profile.id"
-          v-model="profileId"
-          class="accent-main-purple w-10 border-main-purple"
-        />
+      <div class="max-h-36 md:max-h-52 overflow-y-scroll md:overflow-auto">
+        <div
+          class="flex justify-between items-center pb-4"
+          v-for="(profile, index) in profiles"
+          :key="index"
+        >
+          <label :for="profile.id" class="font-normal text-sm text-black">{{ profile.name }}</label>
+          <input
+            type="radio"
+            :id="profile.id"
+            :value="profile.id"
+            v-model="profileId"
+            class="accent-main-purple w-10 border-main-purple"
+          />
+        </div>
       </div>
     </template>
   </ModalLayout>
