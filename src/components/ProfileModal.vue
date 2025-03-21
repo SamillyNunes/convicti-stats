@@ -91,6 +91,12 @@ const managePermissionInsideList = (permissionId: Number) => {
 const onSubmitProfile = async () => {
   isLoading.value = true
   try {
+    if (permissions.value.length === 0) {
+      toast.error('Você deve selecionar ao menos um perfil.')
+      isLoading.value = false
+      return
+    }
+
     var response
     if (props.selectedProfile) {
       response = await updateProfile(props.selectedProfile.id, profileName.value, permissions.value)
@@ -103,9 +109,10 @@ const onSubmitProfile = async () => {
     }
   } catch (error: any) {
     console.error(error)
+    props.onCancel()
     toast.error(error)
   } finally {
-    isLoading.value = true
+    isLoading.value = false
   }
 }
 </script>
