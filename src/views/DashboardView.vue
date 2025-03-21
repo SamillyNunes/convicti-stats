@@ -28,11 +28,11 @@
         title="Erros"
         :icon-url="errorsIcon"
         alt="Ícone vermelho em formato de x representando erros."
-        android-value="2"
-        apple-value="1"
+        :android-value="androidErrors.toString()"
+        :apple-value="iosErrors.toString()"
         decrease-value="-5%"
       >
-        <h1 class="font-bold text-[2.5rem]">330</h1>
+        <h1 class="font-bold text-[2.5rem]">{{ allErrors }}</h1>
       </StatsCard>
     </div>
 
@@ -54,9 +54,11 @@ import Title from '@/components/Title.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useDownloads } from '@/composables/useDownloads'
 import { useEvaluations } from '@/composables/useEvaluations'
+import { useErrors } from '@/composables/useErrors'
 
 const authStore = useAuthStore()
 
 const { allDownloads, androidDownloads, iosDownloads } = useDownloads()
 const { allEvaluations, androidEvaluations, iosEvaluations } = useEvaluations()
+const { allErrors, androidErrors, iosErrors } = useErrors()
 </script>
