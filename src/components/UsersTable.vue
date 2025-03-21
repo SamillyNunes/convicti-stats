@@ -5,6 +5,9 @@
   <div v-else-if="errorMsg" class="flex items-center justify-center w-full h-[80%]">
     <h2>{{ errorMsg }}</h2>
   </div>
+
+  <NoItemsInfo v-else-if="users.length === 0" />
+
   <SettingsTableLayout v-else>
     <template v-slot:headers>
       <div class="table-cell w-2/12 py-1">Nome</div>
@@ -44,6 +47,7 @@ import { onMounted, ref, watch } from 'vue'
 import { getUsers } from '@/api/users'
 import type IUser from '@/shared/interfaces/IUser'
 import CustomSpinner from './CustomSpinner.vue'
+import NoItemsInfo from './NoItemsInfo.vue'
 
 const users = ref<IUser[]>([])
 const isLoading = ref(false)

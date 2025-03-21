@@ -5,6 +5,9 @@
   <div v-else-if="errorMsg" class="flex items-center justify-center w-full h-[80%]">
     <h2>{{ errorMsg }}</h2>
   </div>
+
+  <NoItemsInfo v-else-if="profiles.length === 0" />
+
   <SettingsTableLayout v-else>
     <template v-slot:headers>
       <div class="table-cell w-2/12 py-1">Nome</div>
@@ -46,6 +49,7 @@ import EditButton from './EditButton.vue'
 import RoundedLabel from './RoundedLabel.vue'
 import type IProfile from '@/shared/interfaces/IProfile'
 import CustomSpinner from './CustomSpinner.vue'
+import NoItemsInfo from './NoItemsInfo.vue'
 
 defineProps<{
   profiles: IProfile[]

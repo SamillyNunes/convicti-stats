@@ -2,7 +2,9 @@
   <Card class="h-[35%]">
     <Subtitle subtitle="Feedbacks" />
 
-    <table class="table-fixed w-full border-separate border-spacing-y-1">
+    <NoItemsInfo v-if="evaluations.length === 0" />
+
+    <table v-else class="table-fixed w-full border-separate border-spacing-y-1">
       <thead class="font-normal text-xs text-gray-200 text-left opacity-40">
         <tr>
           <th class="w-3/5">Avaliação</th>
@@ -38,6 +40,7 @@
 
 <script setup lang="ts">
 import Card from './Card.vue'
+import NoItemsInfo from './NoItemsInfo.vue'
 import Subtitle from './Subtitle.vue'
 import type IEvaluation from '@/shared/interfaces/IEvaluation'
 
