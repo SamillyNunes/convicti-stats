@@ -1,15 +1,12 @@
 import { getNewFeatures } from '@/api/stats'
 import type IFeature from '@/shared/interfaces/IFeature'
-import { onMounted, ref } from 'vue'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export function useFeatures() {
+export const useFeaturesStore = defineStore('features', () => {
   const allNewFeatures = ref<IFeature[]>([])
 
   const isNewFeaturesLoading = ref(false)
-
-  onMounted(() => {
-    fetchNewFeatures()
-  })
 
   const fetchNewFeatures = async () => {
     isNewFeaturesLoading.value = true
@@ -37,4 +34,4 @@ export function useFeatures() {
   }
 
   return { allNewFeatures, isNewFeaturesLoading, fetchNewFeatures }
-}
+})
