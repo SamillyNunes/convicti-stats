@@ -28,11 +28,11 @@
         title="Erros"
         :icon-url="errorsIcon"
         alt="Ícone vermelho em formato de x representando erros."
-        :android-value="androidErrors.toString()"
-        :apple-value="iosErrors.toString()"
+        :android-value="errorsStore.androidErrors.toString()"
+        :apple-value="errorsStore.iosErrors.toString()"
         decrease-value="-5%"
       >
-        <h1 class="font-bold text-[2.5rem]">{{ allErrors }}</h1>
+        <h1 class="font-bold text-[2.5rem]">{{ errorsStore.allErrors }}</h1>
       </StatsCard>
     </div>
 
@@ -53,17 +53,18 @@ import Layout from '@/components/Layout.vue'
 import Title from '@/components/Title.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useEvaluations } from '@/composables/useEvaluations'
-import { useErrors } from '@/composables/useErrors'
 import { useDownloadsStore } from '@/stores/downloads'
 import { onMounted } from 'vue'
+import { useErrorsStore } from '@/stores/errors'
 
 const authStore = useAuthStore()
 
 const downloadsStore = useDownloadsStore()
 const { allEvaluationsCount, androidEvaluations, iosEvaluations, allEvaluations } = useEvaluations()
-const { allErrors, androidErrors, iosErrors } = useErrors()
+const errorsStore = useErrorsStore()
 
 onMounted(() => {
   downloadsStore.fetchDownloads()
+  errorsStore.fetchErrors()
 })
 </script>

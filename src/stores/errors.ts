@@ -1,16 +1,13 @@
-import { getErrors, getEvaluations } from '@/api/stats'
-import { onMounted, ref } from 'vue'
+import { getErrors } from '@/api/stats'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export function useErrors() {
+export const useErrorsStore = defineStore('errors', () => {
   const allErrors = ref(0)
   const androidErrors = ref(0)
   const iosErrors = ref(0)
 
   const isErrorsLoading = ref(false)
-
-  onMounted(() => {
-    fetchErrors()
-  })
 
   const fetchErrors = async () => {
     isErrorsLoading.value = true
@@ -50,4 +47,4 @@ export function useErrors() {
     isErrorsLoading,
     fetchErrors,
   }
-}
+})
