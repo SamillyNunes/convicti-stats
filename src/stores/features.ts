@@ -7,8 +7,11 @@ export const useFeaturesStore = defineStore('features', () => {
   const allNewFeatures = ref<IFeature[]>([])
 
   const isNewFeaturesLoading = ref(false)
+  let isAlreadyFetched = false
 
   const fetchNewFeatures = async () => {
+    if (isAlreadyFetched || isNewFeaturesLoading.value) return
+
     isNewFeaturesLoading.value = true
     try {
       let currentPage = 1
@@ -26,6 +29,7 @@ export const useFeaturesStore = defineStore('features', () => {
 
         console.log(response)
       }
+      isAlreadyFetched = true
     } catch (error) {
       console.error(error)
     } finally {

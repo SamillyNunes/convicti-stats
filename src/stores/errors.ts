@@ -6,10 +6,13 @@ export const useErrorsStore = defineStore('errors', () => {
   const allErrors = ref(0)
   const androidErrors = ref(0)
   const iosErrors = ref(0)
+  let isAlreadyFetched = false
 
   const isErrorsLoading = ref(false)
 
   const fetchErrors = async () => {
+    if (isAlreadyFetched || isErrorsLoading.value) return
+
     isErrorsLoading.value = true
     try {
       let currentPage = 1
@@ -33,6 +36,8 @@ export const useErrorsStore = defineStore('errors', () => {
 
         console.log(response)
       }
+
+      isAlreadyFetched = true
     } catch (error) {
       console.error(error)
     } finally {

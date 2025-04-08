@@ -11,8 +11,11 @@ export const useEvaluationsStore = defineStore('evaluations', () => {
   const allEvaluations = ref<IEvaluation[]>([])
 
   const isEvaluationsLoading = ref(false)
+  let isAlreadyFetched = false
 
   const fetchEvaluations = async () => {
+    if (isAlreadyFetched || isEvaluationsLoading.value) return
+
     isEvaluationsLoading.value = true
     try {
       let currentPage = 1
@@ -37,6 +40,7 @@ export const useEvaluationsStore = defineStore('evaluations', () => {
 
         console.log(response)
       }
+      isAlreadyFetched = true
     } catch (error) {
       console.error(error)
     } finally {
