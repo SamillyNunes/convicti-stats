@@ -6,12 +6,13 @@ export const useDownloadsStore = defineStore('downloads', () => {
   const allDownloads = ref(0)
   const androidDownloads = ref(0)
   const iosDownloads = ref(0)
-  let isAlreadyFetched = false
 
+  let isAlreadyFetched = false
+  const lastIdChecked = ref<number>(0)
   const isDownloadsLoading = ref(false)
 
   const fetchDownloads = async () => {
-    if (isAlreadyFetched || isDownloadsLoading.value) return
+    if (isDownloadsLoading.value) return
 
     isDownloadsLoading.value = true
     try {
@@ -22,6 +23,11 @@ export const useDownloadsStore = defineStore('downloads', () => {
         const response = await getDownloads(currentPage)
 
         response.data.data.forEach((download: any) => {
+          if (isAlreadyFetched && lastIdChecked.value <= download.id) return
+
+          // Armazenando o ultimo id que foi checado para os casos de atualizacao
+          lastIdChecked.value = download.id
+
           allDownloads.value += 1
           if (download.platform === 'ANDROID') {
             androidDownloads.value += 1
@@ -33,8 +39,6 @@ export const useDownloadsStore = defineStore('downloads', () => {
 
         totalPages = response.data.last_page
         currentPage++
-
-        console.log(response)
       }
       isAlreadyFetched = true
     } catch (error) {

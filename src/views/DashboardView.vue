@@ -56,7 +56,7 @@ import Layout from '@/components/Layout.vue'
 import Title from '@/components/Title.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useDownloadsStore } from '@/stores/downloads'
-import { onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
 import { useErrorsStore } from '@/stores/errors'
 import { useEvaluationsStore } from '@/stores/evaluations'
 
@@ -70,5 +70,11 @@ onMounted(() => {
   downloadsStore.fetchDownloads()
   errorsStore.fetchErrors()
   evaluationsStore.fetchEvaluations()
+
+  const interval = setInterval(() => {
+    downloadsStore.fetchDownloads()
+  }, 300000)
+
+  onUnmounted(() => clearInterval(interval))
 })
 </script>
