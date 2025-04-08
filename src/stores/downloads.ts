@@ -1,16 +1,13 @@
 import { getDownloads } from '@/api/stats'
-import { onMounted, ref } from 'vue'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export function useDownloads() {
+export const useDownloadsStore = defineStore('downloads', () => {
   const allDownloads = ref(0)
   const androidDownloads = ref(0)
   const iosDownloads = ref(0)
 
   const isDownloadsLoading = ref(false)
-
-  onMounted(() => {
-    fetchDownloads()
-  })
 
   const fetchDownloads = async () => {
     isDownloadsLoading.value = true
@@ -44,4 +41,4 @@ export function useDownloads() {
   }
 
   return { allDownloads, androidDownloads, iosDownloads, isDownloadsLoading, fetchDownloads }
-}
+})

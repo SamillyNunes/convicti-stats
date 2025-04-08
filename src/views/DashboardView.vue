@@ -8,10 +8,10 @@
         title="Downloads"
         :icon-url="cloudIcon"
         alt="Ícone de nuvem"
-        :android-value="androidDownloads.toString()"
-        :apple-value="iosDownloads.toString()"
+        :android-value="downloadsStore.androidDownloads.toString()"
+        :apple-value="downloadsStore.iosDownloads.toString()"
       >
-        <h1 class="font-bold text-[2.5rem]">{{ allDownloads }}</h1>
+        <h1 class="font-bold text-[2.5rem]">{{ downloadsStore.allDownloads }}</h1>
       </StatsCard>
       <StatsCard
         v-if="authStore.evaluationsAllowed"
@@ -52,13 +52,18 @@ import FeaturesCard from '@/components/FeaturesCard.vue'
 import Layout from '@/components/Layout.vue'
 import Title from '@/components/Title.vue'
 import { useAuthStore } from '@/stores/auth'
-import { useDownloads } from '@/composables/useDownloads'
 import { useEvaluations } from '@/composables/useEvaluations'
 import { useErrors } from '@/composables/useErrors'
+import { useDownloadsStore } from '@/stores/downloads'
+import { onMounted } from 'vue'
 
 const authStore = useAuthStore()
 
-const { allDownloads, androidDownloads, iosDownloads } = useDownloads()
+const downloadsStore = useDownloadsStore()
 const { allEvaluationsCount, androidEvaluations, iosEvaluations, allEvaluations } = useEvaluations()
 const { allErrors, androidErrors, iosErrors } = useErrors()
+
+onMounted(() => {
+  downloadsStore.fetchDownloads()
+})
 </script>
