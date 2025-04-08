@@ -6,10 +6,13 @@ export const useDownloadsStore = defineStore('downloads', () => {
   const allDownloads = ref(0)
   const androidDownloads = ref(0)
   const iosDownloads = ref(0)
+  let isAlreadyFetched = false
 
   const isDownloadsLoading = ref(false)
 
   const fetchDownloads = async () => {
+    if (isAlreadyFetched || isDownloadsLoading.value) return
+
     isDownloadsLoading.value = true
     try {
       let currentPage = 1
@@ -33,6 +36,7 @@ export const useDownloadsStore = defineStore('downloads', () => {
 
         console.log(response)
       }
+      isAlreadyFetched = true
     } catch (error) {
       console.error(error)
     } finally {
