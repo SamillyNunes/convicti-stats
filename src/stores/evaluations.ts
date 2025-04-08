@@ -1,8 +1,9 @@
 import { getEvaluations } from '@/api/stats'
 import type IEvaluation from '@/shared/interfaces/IEvaluation'
-import { onMounted, ref } from 'vue'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export function useEvaluations() {
+export const useEvaluationsStore = defineStore('evaluations', () => {
   const allEvaluationsCount = ref(0)
   const androidEvaluations = ref(0)
   const iosEvaluations = ref(0)
@@ -10,10 +11,6 @@ export function useEvaluations() {
   const allEvaluations = ref<IEvaluation[]>([])
 
   const isEvaluationsLoading = ref(false)
-
-  onMounted(() => {
-    fetchEvaluations()
-  })
 
   const fetchEvaluations = async () => {
     isEvaluationsLoading.value = true
@@ -55,4 +52,4 @@ export function useEvaluations() {
     isEvaluationsLoading,
     fetchEvaluations,
   }
-}
+})

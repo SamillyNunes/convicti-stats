@@ -18,10 +18,10 @@
         title="Avaliações"
         :icon-url="starsIcon"
         alt="Ícone representando estrelas dadas em avaliações"
-        :android-value="androidEvaluations.toString()"
-        :apple-value="iosEvaluations.toString()"
+        :android-value="evaluationsStore.androidEvaluations.toString()"
+        :apple-value="evaluationsStore.iosEvaluations.toString()"
       >
-        <h1 class="font-bold text-[2.5rem]">{{ allEvaluationsCount }}</h1>
+        <h1 class="font-bold text-[2.5rem]">{{ evaluationsStore.allEvaluationsCount }}</h1>
       </StatsCard>
       <StatsCard
         v-if="authStore.errorsAllowed"
@@ -36,7 +36,10 @@
       </StatsCard>
     </div>
 
-    <FeedbacksCard v-if="authStore.feedbacksAllowed" :evaluations="allEvaluations" />
+    <FeedbacksCard
+      v-if="authStore.feedbacksAllowed"
+      :evaluations="evaluationsStore.allEvaluations"
+    />
 
     <FeaturesCard v-if="authStore.featuresAllowed" />
   </Layout>
@@ -52,19 +55,20 @@ import FeaturesCard from '@/components/FeaturesCard.vue'
 import Layout from '@/components/Layout.vue'
 import Title from '@/components/Title.vue'
 import { useAuthStore } from '@/stores/auth'
-import { useEvaluations } from '@/composables/useEvaluations'
 import { useDownloadsStore } from '@/stores/downloads'
 import { onMounted } from 'vue'
 import { useErrorsStore } from '@/stores/errors'
+import { useEvaluationsStore } from '@/stores/evaluations'
 
 const authStore = useAuthStore()
 
 const downloadsStore = useDownloadsStore()
-const { allEvaluationsCount, androidEvaluations, iosEvaluations, allEvaluations } = useEvaluations()
+const evaluationsStore = useEvaluationsStore()
 const errorsStore = useErrorsStore()
 
 onMounted(() => {
   downloadsStore.fetchDownloads()
   errorsStore.fetchErrors()
+  evaluationsStore.fetchEvaluations()
 })
 </script>
